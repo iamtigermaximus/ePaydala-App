@@ -49,7 +49,19 @@ const RootLayout = () => {
 
   return (
     <Stack>
-      <Stack.Screen name="index" options={{ title: 'Login' }} />
+      <Stack.Screen
+        name="index"
+        options={{
+          title: '',
+          headerStyle: {
+            backgroundColor: '#05122D', // Header background color
+          },
+          headerTintColor: '#fff', // Header text color
+          contentStyle: {
+            backgroundColor: '#ffebcd', // Background color for screen content
+          },
+        }}
+      />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
     </Stack>
   );
