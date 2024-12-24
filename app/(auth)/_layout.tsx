@@ -1,71 +1,4 @@
-// import React from 'react';
-// import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-// import { Stack } from 'expo-router';
-// import Icon from 'react-native-vector-icons/MaterialIcons';
-// import auth from '@react-native-firebase/auth';
 
-// const Layout = () => {
-//   const user = auth().currentUser;
-//   const displayName = user?.phoneNumber || 'User';
-
-//   return (
-//     <Stack>
-//       <Stack.Screen
-//         name="home"
-//         options={{
-//           title: '',
-//           headerStyle: {
-//             backgroundColor: '#05122D',
-//           },
-//           headerLeft: () => (
-//             <View>
-//               <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>
-//                 Hi, {displayName}!
-//               </Text>
-//             </View>
-//           ),
-//           headerRight: () => (
-//             <TouchableOpacity
-//               onPress={() => {
-//                 console.log('Settings Pressed');
-//               }}
-//             >
-//               <View style={styles.iconContainer}>
-//                 <Icon name="person" size={18} color="#fff" />
-//               </View>
-//             </TouchableOpacity>
-//           ),
-//         }}
-//       />
-//     </Stack>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     backgroundColor: '#05122D',
-//     paddingHorizontal: 20,
-//     paddingTop: 10,
-//     height: '100%',
-//   },
-//   headLabel: {
-//     fontSize: 25,
-//     marginBottom: 10,
-//     color: '#fff',
-//     fontWeight: 'bold',
-//   },
-//   iconContainer: {
-//     paddingHorizontal: 2,
-//     paddingVertical: 2,
-//     borderRadius: '50%',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     borderWidth: 1,
-//     borderColor: '#fff',
-//   },
-// });
-
-// export default Layout;
 
 import React from 'react';
 import { Tabs } from 'expo-router';
@@ -95,41 +28,43 @@ const Layout = () => {
         <Tabs.Screen
           name="home"
           options={{
-            title: 'home',
             tabBarLabel: 'Home',
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="home" size={24} color={color} />
             ),
-            headerStyle: {
-              backgroundColor: '#05122D',
-            },
-            headerLeft: () => (
-              <View>
+            header: () => (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  backgroundColor: '#05122D',
+                  paddingHorizontal: 10,
+                  paddingTop: 60,
+                  paddingBottom: 10,
+                  // borderBottomWidth: 0.5,
+                  // borderColor: '#fff',
+                }}
+              >
                 <Text
                   style={{
-                    color: '#fff',
+                    color: '#cfcfe8',
                     fontSize: 18,
                     fontWeight: 'bold',
-                    marginLeft: 10,
                   }}
                 >
                   Hi, {displayName}!
                 </Text>
+                <TouchableOpacity onPress={() => auth().signOut()}>
+                  <View style={styles.iconContainer}>
+                    <MaterialIcons name="person" size={18} color="#cfcfe8" />
+                  </View>
+                </TouchableOpacity>
               </View>
-            ),
-            headerRight: () => (
-              <TouchableOpacity
-                onPress={() => {
-                  console.log('Settings Pressed');
-                }}
-              >
-                <View style={styles.iconContainer}>
-                  <MaterialIcons name="person" size={18} color="#fff" />
-                </View>
-              </TouchableOpacity>
             ),
           }}
         />
+
         {/* SendTab */}
         <Tabs.Screen
           name="send"
@@ -214,9 +149,79 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#cfcfe8',
     marginRight: 10,
   },
 });
 
 export default Layout;
+
+
+// import React from 'react';
+// import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+// import { Stack } from 'expo-router';
+// import Icon from 'react-native-vector-icons/MaterialIcons';
+// import auth from '@react-native-firebase/auth';
+
+// const Layout = () => {
+//   const user = auth().currentUser;
+//   const displayName = user?.phoneNumber || 'User';
+
+//   return (
+//     <Stack>
+//       <Stack.Screen
+//         name="home"
+//         options={{
+//           title: '',
+//           headerStyle: {
+//             backgroundColor: '#05122D',
+//           },
+//           headerLeft: () => (
+//             <View>
+//               <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>
+//                 Hi, {displayName}!
+//               </Text>
+//             </View>
+//           ),
+//           headerRight: () => (
+//             <TouchableOpacity
+//               onPress={() => {
+//                 console.log('Settings Pressed');
+//               }}
+//             >
+//               <View style={styles.iconContainer}>
+//                 <Icon name="person" size={18} color="#fff" />
+//               </View>
+//             </TouchableOpacity>
+//           ),
+//         }}
+//       />
+//     </Stack>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     backgroundColor: '#05122D',
+//     paddingHorizontal: 20,
+//     paddingTop: 10,
+//     height: '100%',
+//   },
+//   headLabel: {
+//     fontSize: 25,
+//     marginBottom: 10,
+//     color: '#fff',
+//     fontWeight: 'bold',
+//   },
+//   iconContainer: {
+//     paddingHorizontal: 2,
+//     paddingVertical: 2,
+//     borderRadius: '50%',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     borderWidth: 1,
+//     borderColor: '#fff',
+//   },
+// });
+
+// export default Layout;

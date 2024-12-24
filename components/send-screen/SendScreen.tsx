@@ -1,17 +1,21 @@
-import TransactionsScreen from '@/components/transactions-screen/TransactionsScreen';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 
-const TransactionsPage = () => {
+const SendScreen = () => {
   return (
     <View style={styles.container}>
-      <TransactionsScreen />
+      <Text style={styles.headLabel}>Send Screen</Text>
     </View>
   );
 };
 
+export default SendScreen;
+
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'red',
+    paddingHorizontal: 10,
+    paddingTop: 10,
     height: '100%',
   },
   headLabel: {
@@ -21,5 +25,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-export default TransactionsPage;

@@ -1,18 +1,18 @@
+import SendScreen from '@/components/send-screen/SendScreen';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const SendPage = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.headLabel}>Settings</Text>
-      {/* You can add settings-related content here */}
+      <SendScreen />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#05122D',
+    backgroundColor: 'red',
     paddingHorizontal: 20,
     paddingTop: 10,
     height: '100%',
