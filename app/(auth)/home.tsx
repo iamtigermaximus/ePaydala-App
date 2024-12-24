@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
-const Page = () => {
+const HomePage = () => {
   const user = auth().currentUser;
 
   // Ensure the user object is available and has a phoneNumber
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Page;
+export default HomePage;
