@@ -127,6 +127,19 @@ const RootLayout = () => {
           headerTintColor: '#fff',
         }}
       />
+
+      <Stack.Screen
+        name="personal-information"
+        options={{
+          title: 'Personal Information',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
     </Stack>
   );
 };

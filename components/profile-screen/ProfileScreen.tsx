@@ -47,6 +47,7 @@ const ProfileScreen = () => {
                   name="chevron-with-circle-right"
                   size={20}
                   color="#35166e"
+                  onPress={() => router.push('/personal-information')}
                 />
               </Text>
             </View>
