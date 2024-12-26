@@ -140,6 +140,79 @@ const RootLayout = () => {
           headerTintColor: '#fff',
         }}
       />
+      <Stack.Screen
+        name="code-biometry"
+        options={{
+          title: 'Code and Biometry',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
+        name="cards-accounts"
+        options={{
+          title: 'Cards and Accounts',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Stack.Screen
+        name="e-wallets"
+        options={{
+          title: 'eWallets',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Stack.Screen
+        name="settings"
+        options={{
+          title: 'Settings',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Stack.Screen
+        name="help-and-support"
+        options={{
+          title: 'Help and Support',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Stack.Screen
+        name="about"
+        options={{
+          title: 'About',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
     </Stack>
   );
 };

@@ -67,6 +67,7 @@ const ProfileScreen = () => {
                   name="chevron-with-circle-right"
                   size={20}
                   color="#35166e"
+                  onPress={() => router.push('/code-biometry')}
                 />
               </Text>
             </View>
@@ -86,6 +87,7 @@ const ProfileScreen = () => {
                   name="chevron-with-circle-right"
                   size={20}
                   color="#35166e"
+                  onPress={() => router.push('/cards-accounts')}
                 />
               </Text>
             </View>
@@ -109,6 +111,7 @@ const ProfileScreen = () => {
                   name="chevron-with-circle-right"
                   size={20}
                   color="#35166e"
+                  onPress={() => router.push('/e-wallets')}
                 />
               </Text>
             </View>
@@ -130,6 +133,7 @@ const ProfileScreen = () => {
                   name="chevron-with-circle-right"
                   size={20}
                   color="#35166e"
+                  onPress={() => router.push('/settings')}
                 />
               </Text>
             </View>
@@ -149,6 +153,7 @@ const ProfileScreen = () => {
                   name="chevron-with-circle-right"
                   size={20}
                   color="#35166e"
+                  onPress={() => router.push('/help-and-support')}
                 />
               </Text>
             </View>
@@ -172,6 +177,7 @@ const ProfileScreen = () => {
                   name="chevron-with-circle-right"
                   size={20}
                   color="#35166e"
+                  onPress={() => router.push('/about')}
                 />
               </Text>
             </View>
