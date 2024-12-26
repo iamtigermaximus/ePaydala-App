@@ -63,6 +63,70 @@ const RootLayout = () => {
         }}
       />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+          contentStyle: {
+            backgroundColor: '#ffebcd',
+          },
+        }}
+      />
+
+      <Stack.Screen
+        name="link-fi-bank"
+        options={{
+          title: 'Link Finnish Bank',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Stack.Screen
+        name="link-ph-bank"
+        options={{
+          title: 'Link Philippine Bank',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Stack.Screen
+        name="link-ph-payment-method"
+        options={{
+          title: 'Link Philippine Payment Method',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Stack.Screen
+        name="login"
+        options={{
+          title: 'Login',
+          headerBackVisible: false,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
     </Stack>
   );
 };

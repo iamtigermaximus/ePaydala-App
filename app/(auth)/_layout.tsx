@@ -1,7 +1,5 @@
-
-
 import React from 'react';
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
@@ -12,6 +10,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 const Layout = () => {
   const user = auth().currentUser;
   const displayName = user?.phoneNumber || 'User';
+  const router = useRouter();
   return (
     <View style={styles.tabContainer}>
       <Tabs
@@ -55,7 +54,7 @@ const Layout = () => {
                 >
                   Hi, {displayName}!
                 </Text>
-                <TouchableOpacity onPress={() => auth().signOut()}>
+                <TouchableOpacity onPress={() => router.push('/profile')}>
                   <View style={styles.iconContainer}>
                     <MaterialIcons name="person" size={18} color="#cfcfe8" />
                   </View>
@@ -155,7 +154,6 @@ const styles = StyleSheet.create({
 });
 
 export default Layout;
-
 
 // import React from 'react';
 // import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';

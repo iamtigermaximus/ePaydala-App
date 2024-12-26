@@ -7,6 +7,7 @@ import {
 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
+import { useRouter } from 'expo-router';
 
 const Container = styled.View`
   flex: 1;
@@ -71,11 +72,7 @@ const LinkItemSubtext = styled.Text`
 `;
 
 export default function GetStarted() {
-  const navigation = useNavigation();
-
-  const goToRoute = () => {
-    alert('get started');
-  };
+  const router = useRouter();
   return (
     <View>
       <Container>
@@ -99,6 +96,7 @@ export default function GetStarted() {
                   name="chevron-with-circle-right"
                   size={30}
                   color="#35166e"
+                  onPress={() => router.push('/link-fi-bank')}
                 />
               </Text>
             </View>
@@ -127,6 +125,7 @@ export default function GetStarted() {
                   name="chevron-with-circle-right"
                   size={30}
                   color="#35166e"
+                  onPress={() => router.push('/link-ph-bank')}
                 />
               </Text>
             </View>
@@ -149,6 +148,7 @@ export default function GetStarted() {
                   name="chevron-with-circle-right"
                   size={30}
                   color="#35166e"
+                  onPress={() => router.push('/link-ph-payment-method')}
                 />
               </Text>
             </View>
