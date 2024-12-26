@@ -1,19 +1,22 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import LinkFiBankScreen from '@/components/link-fi-bank/LinkFiBankScreen';
 
-const LinkFiBankPage = () => {
+const LinkPhPaymentMethodScreen = () => {
   return (
     <View style={styles.container}>
-      <LinkFiBankScreen />
+      <Text style={styles.headLabel}>
+        Link Philippine Payment Method Screen
+      </Text>
     </View>
   );
 };
 
+export default LinkPhPaymentMethodScreen;
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'purple',
-    paddingHorizontal: 20,
+    backgroundColor: 'pink',
+    paddingHorizontal: 10,
     paddingTop: 10,
     height: '100%',
   },
@@ -24,5 +27,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-export default LinkFiBankPage;
