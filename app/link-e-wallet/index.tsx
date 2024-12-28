@@ -1,18 +1,18 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import LinkPhPaymentMethodScreen from '@/components/link-ph-payment-method/LinkPhPaymentMethod';
+import LinkEWalletScreen from '@/components/link-e-wallet/LinkEWalletScreen';
 
-const LinkPhPaymentMethod = () => {
+const LinkEWalletPage = () => {
   return (
     <View style={styles.container}>
-      <LinkPhPaymentMethodScreen />
+      <LinkEWalletScreen />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#05122D',
+    backgroundColor: '#05122d',
     paddingHorizontal: 20,
     paddingTop: 10,
     height: '100%',
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LinkPhPaymentMethod;
+export default LinkEWalletPage;

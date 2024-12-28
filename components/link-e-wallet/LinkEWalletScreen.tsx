@@ -96,7 +96,7 @@ const ContinueButton = styled.Text`
   font-weight: 700;
 `;
 
-const LinkPhPaymentMethodScreen = () => {
+const LinkEWalletScreen = () => {
   return (
     <Container>
       <ContentContainer>
@@ -113,7 +113,7 @@ const LinkPhPaymentMethodScreen = () => {
                 <ItemIcon>
                   <MaterialCommunityIcons name="bank" size={30} color="#fff" />
                 </ItemIcon>
-                <ItemText>Send money to Finland from your account </ItemText>
+                <ItemText>Receive money directly in your account </ItemText>
               </Item>
             </ItemsWrapper>
           </TouchableOpacity>
@@ -168,4 +168,4 @@ const LinkPhPaymentMethodScreen = () => {
   );
 };
 
-export default LinkPhPaymentMethodScreen;
+export default LinkEWalletScreen;

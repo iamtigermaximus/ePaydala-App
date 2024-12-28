@@ -106,14 +106,10 @@ export default function GetStarted() {
           <LinkContainer>
             <LinkItemContainer>
               <LinkItemIcon>
-                <MaterialIcons
-                  name="account-balance-wallet"
-                  size={30}
-                  color="#35166e"
-                />
+                <MaterialCommunityIcons name="bank" size={35} color="#35166e" />
               </LinkItemIcon>
               <LinkItem>
-                <LinkItemHeader>Add a PH bank/e-wallet</LinkItemHeader>
+                <LinkItemHeader>Add a PH bank</LinkItemHeader>
                 <LinkItemSubtext>
                   Receive PHP from your family and friends
                 </LinkItemSubtext>
@@ -126,6 +122,35 @@ export default function GetStarted() {
                   size={30}
                   color="#35166e"
                   onPress={() => router.push('/link-ph-bank')}
+                />
+              </Text>
+            </View>
+          </LinkContainer>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <LinkContainer>
+            <LinkItemContainer>
+              <LinkItemIcon>
+                <MaterialIcons
+                  name="account-balance-wallet"
+                  size={30}
+                  color="#35166e"
+                />
+              </LinkItemIcon>
+              <LinkItem>
+                <LinkItemHeader>Add a PH e-wallet</LinkItemHeader>
+                <LinkItemSubtext>
+                  Receive PHP from your family and friends
+                </LinkItemSubtext>
+              </LinkItem>
+            </LinkItemContainer>
+            <View>
+              <Text>
+                <Entypo
+                  name="chevron-with-circle-right"
+                  size={30}
+                  color="#35166e"
+                  onPress={() => router.push('/link-e-wallet')}
                 />
               </Text>
             </View>

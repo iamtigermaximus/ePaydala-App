@@ -94,7 +94,19 @@ const RootLayout = () => {
       <Stack.Screen
         name="link-ph-bank"
         options={{
-          title: 'Link Philippine Bank',
+          title: 'Add PH Bank',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Stack.Screen
+        name="link-e-wallet"
+        options={{
+          title: 'Add PH eWallet',
           headerBackVisible: true,
           headerBackTitle: 'Back',
           headerStyle: {
@@ -106,7 +118,7 @@ const RootLayout = () => {
       <Stack.Screen
         name="link-ph-payment-method"
         options={{
-          title: 'Link Philippine Payment Method',
+          title: 'Link PH Payment Method',
           headerBackVisible: true,
           headerBackTitle: 'Back',
           headerStyle: {

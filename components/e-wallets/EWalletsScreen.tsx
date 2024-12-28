@@ -118,7 +118,7 @@ const EWalletsScreen = () => {
                   name="account-balance-wallet"
                   size={30}
                   color="#35166e"
-                />{' '}
+                />
               </ItemIcon>
               <ItemText>No accounts linked</ItemText>
             </Item>
