@@ -82,7 +82,7 @@ const RootLayout = () => {
       <Stack.Screen
         name="link-fi-bank"
         options={{
-          title: 'Link Finnish Bank',
+          title: 'Link your FI bank',
           headerBackVisible: true,
           headerBackTitle: 'Back',
           headerStyle: {
