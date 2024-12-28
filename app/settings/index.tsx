@@ -12,7 +12,7 @@ const SettingsPage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'purple',
+    backgroundColor: '#05122d',
     paddingHorizontal: 20,
     paddingTop: 10,
     height: '100%',

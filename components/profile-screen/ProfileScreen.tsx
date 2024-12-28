@@ -45,7 +45,7 @@ const ProfileScreen = () => {
               <Text>
                 <Entypo
                   name="chevron-with-circle-right"
-                  size={20}
+                  size={25}
                   color="#35166e"
                   onPress={() => router.push('/personal-information')}
                 />
@@ -65,7 +65,7 @@ const ProfileScreen = () => {
               <Text>
                 <Entypo
                   name="chevron-with-circle-right"
-                  size={20}
+                  size={25}
                   color="#35166e"
                   onPress={() => router.push('/code-biometry')}
                 />
@@ -85,7 +85,7 @@ const ProfileScreen = () => {
               <Text>
                 <Entypo
                   name="chevron-with-circle-right"
-                  size={20}
+                  size={25}
                   color="#35166e"
                   onPress={() => router.push('/cards-accounts')}
                 />
@@ -109,7 +109,7 @@ const ProfileScreen = () => {
               <Text>
                 <Entypo
                   name="chevron-with-circle-right"
-                  size={20}
+                  size={25}
                   color="#35166e"
                   onPress={() => router.push('/e-wallets')}
                 />
@@ -131,7 +131,7 @@ const ProfileScreen = () => {
               <Text>
                 <Entypo
                   name="chevron-with-circle-right"
-                  size={20}
+                  size={25}
                   color="#35166e"
                   onPress={() => router.push('/settings')}
                 />
@@ -151,7 +151,7 @@ const ProfileScreen = () => {
               <Text>
                 <Entypo
                   name="chevron-with-circle-right"
-                  size={20}
+                  size={25}
                   color="#35166e"
                   onPress={() => router.push('/help-and-support')}
                 />
@@ -175,7 +175,7 @@ const ProfileScreen = () => {
               <Text>
                 <Entypo
                   name="chevron-with-circle-right"
-                  size={20}
+                  size={25}
                   color="#35166e"
                   onPress={() => router.push('/about')}
                 />
@@ -259,6 +259,7 @@ const styles = StyleSheet.create({
     padding: 5,
     fontWeight: '700',
     color: '#35166e',
+    fontSize: 18,
   },
   scrollView: {
     backgroundColor: '#05122D',

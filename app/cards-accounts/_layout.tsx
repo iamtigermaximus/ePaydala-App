@@ -15,7 +15,7 @@ const CardsAccountsLayout = () => {
           },
           headerTintColor: 'red', // Header text color
           contentStyle: {
-            backgroundColor: 'yellow', // Background color for screen content
+            backgroundColor: '#35166e;', // Background color for screen content
           },
         }}
       />

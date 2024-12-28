@@ -12,7 +12,7 @@ const PersonalInfoPage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'purple',
+    backgroundColor: '#05122D',
     paddingHorizontal: 20,
     paddingTop: 10,
     height: '100%',
