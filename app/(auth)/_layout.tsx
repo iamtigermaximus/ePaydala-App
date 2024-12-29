@@ -40,7 +40,7 @@ const Layout = () => {
                   backgroundColor: '#05122D',
                   paddingHorizontal: 10,
                   paddingTop: 60,
-                  paddingBottom: 10,
+                  // paddingBottom: 10,
                   // borderBottomWidth: 0.5,
                   // borderColor: '#fff',
                 }}
@@ -56,7 +56,7 @@ const Layout = () => {
                 </Text>
                 <TouchableOpacity onPress={() => router.push('/profile')}>
                   <View style={styles.iconContainer}>
-                    <MaterialIcons name="person" size={18} color="#cfcfe8" />
+                    <MaterialIcons name="person" size={20} color="#cfcfe8" />
                   </View>
                 </TouchableOpacity>
               </View>

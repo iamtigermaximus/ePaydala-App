@@ -11,6 +11,7 @@ import CountryFlag from 'react-native-country-flag';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import GetStarted from './get-started/GetStarted';
+import { useRouter } from 'expo-router';
 
 const StyledScrollView = styled.ScrollView`
   background-color: '#f4eeff';
@@ -122,12 +123,7 @@ const PressableButtonText = styled.Text`
 
 const HomeScreen = () => {
   const [number, onChangeNumber] = useState('');
-
-  const navigation = useNavigation();
-
-  const handleNavigation = () => {
-    alert('navigation link');
-  };
+  const router = useRouter();
 
   return (
     <StyledScrollView>
@@ -241,7 +237,9 @@ const HomeScreen = () => {
             />
           </SafeAreaView>
           <StyledPressable>
-            <PressableButtonText>Continue</PressableButtonText>
+            <PressableButtonText onPress={() => router.push('/send')}>
+              Continue
+            </PressableButtonText>
           </StyledPressable>
         </RatesContainer>
       </Container>
