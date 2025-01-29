@@ -1,13 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import LinkFiBank from '@/components/link-fi-bank/LinkFiBank';
+import SelectFiBankScreen from '@/components/link-fi-bank/SelectFiBankScreen';
 
-const LinkFiBankPage = () => {
-  return (
-    <View style={styles.container}>
-      <LinkFiBank />
-    </View>
-  );
+const CompleteProfilePage = () => {
+  return <View style={styles.container}>{/* <SelectFiBankScreen /> */}</View>;
 };
 
 const styles = StyleSheet.create({
@@ -25,4 +21,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LinkFiBankPage;
+export default CompleteProfilePage;

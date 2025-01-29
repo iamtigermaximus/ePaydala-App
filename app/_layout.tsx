@@ -225,6 +225,30 @@ const RootLayout = () => {
           headerTintColor: '#fff',
         }}
       />
+      <Stack.Screen
+        name="complete-fi-profile"
+        options={{
+          title: 'Complete your profile',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+      <Stack.Screen
+        name="select-fi-bank"
+        options={{
+          title: 'Select your bank',
+          headerBackVisible: true,
+          headerBackTitle: 'Back',
+          headerStyle: {
+            backgroundColor: '#05122D',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
     </Stack>
   );
 };

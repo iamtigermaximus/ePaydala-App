@@ -1,7 +1,12 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+
+interface LinkFiBankScreenProps {
+  setStep: (step: number) => void;
+}
 
 const Container = styled.View`
   /* background-color: pink; */
@@ -27,6 +32,7 @@ const Logo = styled.Image`
 
 const ContentContainer = styled.View`
   gap: 10px;
+  border: 1px solid #05122d;
 `;
 
 const ItemContainer = styled.View`
@@ -96,7 +102,9 @@ const ContinueButton = styled.Text`
   font-weight: 700;
 `;
 
-const LinkFiBankScreen = () => {
+const LinkFiBankScreen: React.FC<LinkFiBankScreenProps> = ({ setStep }) => {
+  const router = useRouter();
+
   return (
     <Container>
       <ContentContainer>
@@ -159,7 +167,7 @@ const LinkFiBankScreen = () => {
           </Label>
         </LabelContainer>
         <ContinueButtonContainer>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setStep(2)}>
             <ContinueButton>Continue</ContinueButton>
           </TouchableOpacity>
         </ContinueButtonContainer>

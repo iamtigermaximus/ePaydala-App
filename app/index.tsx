@@ -13,10 +13,12 @@ import {
   Keyboard,
   StyleSheet,
   Image,
+  Linking,
 } from 'react-native';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { usePathname, useRouter } from 'expo-router';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import axios from 'axios';
 
 const Index = () => {
   const pathname = usePathname();
@@ -37,7 +39,7 @@ const Index = () => {
 
   const [step, setStep] = useState(1); // Manage step flow
   const [isWelcomeScreen, setIsWelcomeScreen] = useState(true); // Welcome screen state
-
+  const [bankLinked, setBankLinked] = useState(false);
   // Handle user state changes
   function onAuthStateChanged(user: FirebaseAuthTypes.User | null) {
     setUser(user); // Set the user state to the authenticated user.
@@ -82,6 +84,18 @@ const Index = () => {
     }
   }
 
+  // Function to link bank and initiate identity verification
+  const startAuthFlow = async () => {
+    try {
+      // Call your backend to get the URL for Signicat OAuth
+      // const response = await fetch('http://localhost:3000/auth/login');
+      // const { authUrl } = await response.json();
+      // Open the Signicat login page in a browser or WebView
+      // Linking.openURL(authUrl);
+    } catch (error) {
+      console.error('Error starting auth flow', error);
+    }
+  };
   if (initializing) return <ActivityIndicator size="large" />; // Wait for initialization.
 
   if (!user) {
@@ -191,12 +205,47 @@ const Index = () => {
                   <View style={styles.backButtonContainer}>
                     <TouchableOpacity
                       style={styles.backButton}
+                      onPress={() => setStep(2)}
+                    >
+                      <Icon name="arrow-back" size={30} color="#fff" />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.bankVerificationContainer}>
+                    <View style={styles.inputContainer}>
+                      <Text style={styles.label}>Confirm your identity</Text>
+                      <Text style={styles.subText}>
+                        To continue you need to confirm your identity.
+                      </Text>
+                    </View>
+                    <View style={styles.nextButtonContainer}>
+                      <TouchableOpacity style={styles.nextButton}>
+                        <Text
+                          style={styles.nextButtonText}
+                          // onPress={startAuthFlow}
+                          onPress={() => setStep(4)}
+                        >
+                          Next
+                        </Text>
+                      </TouchableOpacity>
+                      {loading && (
+                        <ActivityIndicator size="small" color="#fff" />
+                      )}
+                    </View>
+                  </View>
+                </>
+              )}
+
+              {step === 4 && (
+                <>
+                  <View style={styles.backButtonContainer}>
+                    <TouchableOpacity
+                      style={styles.backButton}
                       onPress={() => {
                         if (confirm) {
                           // Navigate back to phone number input if confirm exists
                           setConfirm(null); // Clear the confirmation object
                         } else {
-                          setStep(2); // Navigate back to Social Security Number input
+                          setStep(3); // Navigate back to Social Security Number input
                         }
                       }}
                     >
@@ -427,6 +476,11 @@ const styles = StyleSheet.create({
     paddingBottom: 80,
   },
   phoneNumberScreenContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingBottom: 80,
+  },
+  bankVerificationContainer: {
     flex: 1,
     justifyContent: 'space-between',
     paddingBottom: 80,
