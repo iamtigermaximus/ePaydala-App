@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import LinkPhBankScreen from '@/components/link-ph-bank/LinkPhBankScreen';
+import LinkPhBank from '@/components/link-ph-bank/LinkPhBank';
 
 const LinkPhBankPage = () => {
   return (
     <View style={styles.container}>
-      <LinkPhBankScreen />
+      <LinkPhBank />
     </View>
   );
 };

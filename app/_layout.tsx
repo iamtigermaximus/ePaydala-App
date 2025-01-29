@@ -94,7 +94,7 @@ const RootLayout = () => {
       <Stack.Screen
         name="link-ph-bank"
         options={{
-          title: 'Add PH Bank',
+          title: 'Link your PH bank',
           headerBackVisible: true,
           headerBackTitle: 'Back',
           headerStyle: {

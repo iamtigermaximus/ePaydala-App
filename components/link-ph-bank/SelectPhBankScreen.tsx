@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 
-interface SelectFiBankScreenProps {
+interface SelectPhBankScreenProps {
   setStep: (step: number) => void;
 }
 const Container = styled.View`
@@ -78,7 +78,7 @@ const ItemText = styled.Text`
   color: #35166e;
 `;
 
-const SelectFiBankScreen: React.FC<SelectFiBankScreenProps> = ({ setStep }) => {
+const SelectPhBankScreen: React.FC<SelectPhBankScreenProps> = ({ setStep }) => {
   return (
     <Container>
       <SearchBarContainer>
@@ -100,7 +100,7 @@ const SelectFiBankScreen: React.FC<SelectFiBankScreenProps> = ({ setStep }) => {
               <ItemIcon>
                 <MaterialCommunityIcons name="bank" size={30} color="#35166e" />
               </ItemIcon>
-              <ItemText>Nordea</ItemText>
+              <ItemText>BDO Unibank</ItemText>
             </Item>
           </ItemsWrapper>
         </TouchableOpacity>
@@ -112,7 +112,7 @@ const SelectFiBankScreen: React.FC<SelectFiBankScreenProps> = ({ setStep }) => {
               <ItemIcon>
                 <MaterialCommunityIcons name="bank" size={30} color="#35166e" />
               </ItemIcon>
-              <ItemText>Osuuspankki</ItemText>
+              <ItemText>Land Bank of the Philippines</ItemText>
             </Item>
           </ItemsWrapper>
         </TouchableOpacity>
@@ -124,7 +124,7 @@ const SelectFiBankScreen: React.FC<SelectFiBankScreenProps> = ({ setStep }) => {
               <ItemIcon>
                 <MaterialCommunityIcons name="bank" size={30} color="#35166e" />
               </ItemIcon>
-              <ItemText>Danske Bank</ItemText>
+              <ItemText>Bano of the Philippine Islands</ItemText>
             </Item>
           </ItemsWrapper>
         </TouchableOpacity>
@@ -136,7 +136,7 @@ const SelectFiBankScreen: React.FC<SelectFiBankScreenProps> = ({ setStep }) => {
               <ItemIcon>
                 <MaterialCommunityIcons name="bank" size={30} color="#35166e" />
               </ItemIcon>
-              <ItemText>Aktia</ItemText>
+              <ItemText>Philippine National Bank</ItemText>
             </Item>
           </ItemsWrapper>
         </TouchableOpacity>
@@ -148,7 +148,7 @@ const SelectFiBankScreen: React.FC<SelectFiBankScreenProps> = ({ setStep }) => {
               <ItemIcon>
                 <MaterialCommunityIcons name="bank" size={30} color="#35166e" />
               </ItemIcon>
-              <ItemText>POP Bank</ItemText>
+              <ItemText>Metrobank</ItemText>
             </Item>
           </ItemsWrapper>
         </TouchableOpacity>
@@ -160,7 +160,7 @@ const SelectFiBankScreen: React.FC<SelectFiBankScreenProps> = ({ setStep }) => {
               <ItemIcon>
                 <MaterialCommunityIcons name="bank" size={30} color="#35166e" />
               </ItemIcon>
-              <ItemText>Handelsbanken</ItemText>
+              <ItemText>Development Bank of the Philippines</ItemText>
             </Item>
           </ItemsWrapper>
         </TouchableOpacity>
@@ -172,7 +172,7 @@ const SelectFiBankScreen: React.FC<SelectFiBankScreenProps> = ({ setStep }) => {
               <ItemIcon>
                 <MaterialCommunityIcons name="bank" size={30} color="#35166e" />
               </ItemIcon>
-              <ItemText>S-Bank</ItemText>
+              <ItemText>East West Banking Corporation</ItemText>
             </Item>
           </ItemsWrapper>
         </TouchableOpacity>
@@ -184,7 +184,7 @@ const SelectFiBankScreen: React.FC<SelectFiBankScreenProps> = ({ setStep }) => {
               <ItemIcon>
                 <MaterialCommunityIcons name="bank" size={30} color="#35166e" />
               </ItemIcon>
-              <ItemText>Savings Bank</ItemText>
+              <ItemText>Security Bank</ItemText>
             </Item>
           </ItemsWrapper>
         </TouchableOpacity>
@@ -193,4 +193,4 @@ const SelectFiBankScreen: React.FC<SelectFiBankScreenProps> = ({ setStep }) => {
   );
 };
 
-export default SelectFiBankScreen;
+export default SelectPhBankScreen;

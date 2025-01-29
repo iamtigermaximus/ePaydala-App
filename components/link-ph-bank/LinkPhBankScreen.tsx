@@ -3,6 +3,9 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 
+interface LinkPhBankScreenProps {
+  setStep: (step: number) => void;
+}
 const Container = styled.View`
   /* background-color: pink; */
   /* align-items: center; */
@@ -96,7 +99,7 @@ const ContinueButton = styled.Text`
   font-weight: 700;
 `;
 
-const LinkPhBankScreen = () => {
+const LinkPhBankScreen: React.FC<LinkPhBankScreenProps> = ({ setStep }) => {
   return (
     <Container>
       <ContentContainer>
@@ -159,7 +162,7 @@ const LinkPhBankScreen = () => {
           </Label>
         </LabelContainer> */}
         <ContinueButtonContainer>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setStep(2)}>
             <ContinueButton>Continue</ContinueButton>
           </TouchableOpacity>
         </ContinueButtonContainer>
