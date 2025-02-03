@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import LinkEWalletScreen from '@/components/link-e-wallet/LinkEWalletScreen';
+import LinkEWallet from '@/components/link-e-wallet/LinkEWallet';
 
 const LinkEWalletPage = () => {
   return (
     <View style={styles.container}>
-      <LinkEWalletScreen />
+      <LinkEWallet />
     </View>
   );
 };

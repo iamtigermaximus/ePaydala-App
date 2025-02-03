@@ -156,7 +156,7 @@ export default function GetStarted() {
             </View>
           </LinkContainer>
         </TouchableOpacity>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <LinkContainer>
             <LinkItemContainer>
               <LinkItemIcon>
@@ -178,7 +178,7 @@ export default function GetStarted() {
               </Text>
             </View>
           </LinkContainer>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </Container>
 
       <Container>

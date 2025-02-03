@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
-interface EnterPhBankDetailsScreenProps {
+interface EnterEWalletDetailsScreenProps {
   setStep: (step: number) => void;
 }
 
@@ -104,7 +104,7 @@ const ContinueButton = styled.Text`
   font-weight: 700;
 `;
 
-const EnterPhBankDetailsScreen: React.FC<EnterPhBankDetailsScreenProps> = ({
+const EnterEWalletDetailsScreen: React.FC<EnterEWalletDetailsScreenProps> = ({
   setStep,
 }) => {
   const router = useRouter();
@@ -113,16 +113,16 @@ const EnterPhBankDetailsScreen: React.FC<EnterPhBankDetailsScreenProps> = ({
     <Container>
       <HeaderTextContainer>
         <Label>
-          Ensure your information matches your bank account to keep your money
-          safe.
+          Ensure your account number matches your phone number to keep your
+          money safe.
         </Label>
       </HeaderTextContainer>
       <ItemContainer>
         <LabelContainer>
-          <BankName>BANK NAME HERE</BankName>
+          <BankName>E-WALLET NAME HERE</BankName>
         </LabelContainer>
       </ItemContainer>
-      <ItemContainer>
+      {/* <ItemContainer>
         <LabelContainer>
           <ItemLabel>Account holder name</ItemLabel>
         </LabelContainer>
@@ -131,7 +131,7 @@ const EnterPhBankDetailsScreen: React.FC<EnterPhBankDetailsScreenProps> = ({
             <Item placeholder="Enter account holder name"></Item>
           </ItemsWrapper>
         </TouchableOpacity>
-      </ItemContainer>
+      </ItemContainer> */}
       <ItemContainer>
         <LabelContainer>
           <ItemLabel>Account number</ItemLabel>
@@ -154,11 +154,11 @@ const EnterPhBankDetailsScreen: React.FC<EnterPhBankDetailsScreenProps> = ({
       </ItemContainer>
       <ContinueButtonContainer>
         <TouchableOpacity onPress={() => setStep(3)}>
-          <ContinueButton>Link bank account</ContinueButton>
+          <ContinueButton>Link account</ContinueButton>
         </TouchableOpacity>
       </ContinueButtonContainer>
     </Container>
   );
 };
 
-export default EnterPhBankDetailsScreen;
+export default EnterEWalletDetailsScreen;

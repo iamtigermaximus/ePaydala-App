@@ -3,6 +3,10 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 
+interface LinkEWalletScreenProps {
+  setStep: (step: number) => void;
+}
+
 const Container = styled.View`
   /* background-color: pink; */
   /* align-items: center; */
@@ -96,7 +100,7 @@ const ContinueButton = styled.Text`
   font-weight: 700;
 `;
 
-const LinkEWalletScreen = () => {
+const LinkEWalletScreen: React.FC<LinkEWalletScreenProps> = ({ setStep }) => {
   return (
     <Container>
       <ContentContainer>
@@ -159,7 +163,7 @@ const LinkEWalletScreen = () => {
           </Label>
         </LabelContainer> */}
         <ContinueButtonContainer>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setStep(2)}>
             <ContinueButton>Continue</ContinueButton>
           </TouchableOpacity>
         </ContinueButtonContainer>
