@@ -5,7 +5,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
-  Button,
+  // Button,
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
@@ -13,90 +13,115 @@ import {
   Keyboard,
   StyleSheet,
   Image,
-  Linking,
 } from 'react-native';
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
-import { usePathname, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import axios from 'axios';
+import PocketBase, { RecordModel } from 'pocketbase';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Initialize PocketBase client
+const pb = new PocketBase('http://127.0.0.1:8090'); // Change this to your PocketBase URL
 
 const Index = () => {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const router = useRouter();
 
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null); // Stores the authenticated user.
-  const [confirm, setConfirm] =
-    useState<FirebaseAuthTypes.ConfirmationResult | null>(null); // Stores the confirmation object.
-  const [code, setCode] = useState(''); // Stores the verification code entered by the user.
-
-  // States for country, SSN, and phone number
-  const [country, setCountry] = useState('');
-  const [ssn, setSsn] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [formattedPhoneNumber, setFormattedPhoneNumber] = useState('');
+  const [user, setUser] = useState<RecordModel | null>(null);
+  const [step, setStep] = useState(1);
+  const [isWelcomeScreen, setIsWelcomeScreen] = useState(true);
   const [loading, setLoading] = useState(false);
-
-  const [step, setStep] = useState(1); // Manage step flow
-  const [isWelcomeScreen, setIsWelcomeScreen] = useState(true); // Welcome screen state
-  const [bankLinked, setBankLinked] = useState(false);
-  // Handle user state changes
-  function onAuthStateChanged(user: FirebaseAuthTypes.User | null) {
-    setUser(user); // Set the user state to the authenticated user.
-    if (initializing) setInitializing(false); // Mark initialization as complete.
-  }
+  const [country, setCountry] = useState('');
+  // const [ssn, setSsn] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [code, setCode] = useState('');
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged); // Listen to auth state changes.
-    return subscriber; // Unsubscribe on unmount.
+    checkAuth();
   }, []);
 
-  useEffect(() => {
-    if (pathname === '/firebaseauth/link') router.back(); // Navigate back if on a specific path.
-  }, [pathname]);
-
-  const hardcodedPhoneNumber = '+358402411651';
-
-  // Initiate phone authentication
-  async function signInWithPhoneNumber(phoneNumber: string) {
+  // Check if user is authenticated
+  const checkAuth = async () => {
     try {
-      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-      setConfirm(confirmation);
-    } catch (error) {
-      alert('Failed to send confirmation code. Please try again.');
-      console.error('Error during phone sign-in:', error);
-    }
-  }
+      const token = await AsyncStorage.getItem('auth_token');
+      if (token) {
+        pb.authStore.save(token, null);
+        setUser(pb.authStore.model);
 
-  // Confirm the verification code
-  async function confirmCode() {
-    if (!confirm) {
-      alert('No confirmation object available.');
-      return;
-    }
-
-    try {
-      await confirm.confirm(code);
-      alert('Phone number verified successfully!');
+        // Redirect if authenticated
+        router.replace('/(auth)/home'); // Ensure this matches your home screen route
+      }
     } catch (error) {
-      alert('Invalid verification code. Please try again.');
-      console.error('Invalid code:', error);
-    }
-  }
-
-  // Function to link bank and initiate identity verification
-  const startAuthFlow = async () => {
-    try {
-      // Call your backend to get the URL for Signicat OAuth
-      // const response = await fetch('http://localhost:3000/auth/login');
-      // const { authUrl } = await response.json();
-      // Open the Signicat login page in a browser or WebView
-      // Linking.openURL(authUrl);
-    } catch (error) {
-      console.error('Error starting auth flow', error);
+      console.error('Error checking auth:', error);
     }
   };
-  if (initializing) return <ActivityIndicator size="large" />; // Wait for initialization.
+
+  // Register user with PocketBase
+  const registerUser = async () => {
+    setLoading(true);
+    try {
+      console.log(`OTP sent to ${phoneNumber}: 123456`); // Simulate sending OTP
+      alert('A verification code (123456) has been sent to your phone.');
+      setStep(3); // Move to OTP verification step
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+      alert('Failed to send OTP.');
+    }
+    setLoading(false);
+  };
+
+  // Send OTP using PocketBase
+  // Send OTP using a hardcoded value for now
+  const sendOTP = async () => {
+    setLoading(true);
+    try {
+      console.log(`OTP sent to ${phoneNumber}: 123456`);
+      alert('A verification code (123456) has been sent to your phone.');
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+      alert('Failed to send OTP.');
+    }
+    setLoading(false);
+  };
+
+  // Verify OTP and authenticate user
+  const verifyOTP = async () => {
+    setLoading(true);
+    try {
+      if (code !== '123456') {
+        alert('Invalid OTP. Please try again.');
+        return;
+      }
+
+      // Check if user already exists
+      let user;
+      try {
+        user = await pb
+          .collection('custom_users')
+          .getFirstListItem(`phone="${phoneNumber}"`);
+      } catch (error) {
+        console.log('User not found, proceeding to create new user...');
+      }
+
+      if (!user) {
+        const userData = { country, phone: phoneNumber };
+        user = await pb.collection('custom_users').create(userData);
+        console.log('User created:', user);
+      }
+
+      // Authenticate user and store the token
+      setUser(user);
+      await AsyncStorage.setItem('auth_token', pb.authStore.token);
+
+      alert('Phone number verified successfully!');
+
+      // Redirect to home screen
+      router.replace('/(auth)/home'); // Ensure this path matches your home screen route
+    } catch (error) {
+      console.error('Error verifying OTP:', error);
+      alert('OTP verification failed.');
+    }
+    setLoading(false);
+  };
 
   if (!user) {
     return (
@@ -106,9 +131,9 @@ const Index = () => {
             <View style={styles.welcomeScreen}>
               <View style={styles.logoContainer}>
                 <Image
-                  source={require('../assets/images/ePaydala-navy-piclogo.png')} // Replace with the path to your logo
+                  source={require('../assets/images/ePaydala-navy-piclogo.png')}
                   style={styles.logo}
-                  resizeMode="contain" // Optional: Makes sure the image scales properly
+                  resizeMode="contain"
                 />
               </View>
               <Text style={styles.welcomeText}>Welcome to ePaydala</Text>
@@ -155,7 +180,7 @@ const Index = () => {
                 </View>
               )}
 
-              {step === 2 && (
+              {/* {step === 2 && (
                 <>
                   <View style={styles.backButtonContainer}>
                     <TouchableOpacity
@@ -198,6 +223,49 @@ const Index = () => {
                     </View>
                   </View>
                 </>
+              )} */}
+
+              {step === 2 && (
+                <>
+                  <View style={styles.backButtonContainer}>
+                    <TouchableOpacity
+                      style={styles.backButton}
+                      onPress={() => setStep(1)}
+                    >
+                      <Icon name="arrow-back" size={30} color="#fff" />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.phoneNumberScreenContainer}>
+                    <View style={styles.inputContainer}>
+                      <Text style={styles.label}>
+                        What is your phone number?
+                      </Text>
+                      <Text style={styles.subText}>
+                        {/* Phone Number: {hardcodedPhoneNumber} */}
+                        We will send you a text message with a code to confirm
+                        your number.
+                      </Text>
+                      <TextInput
+                        style={styles.input}
+                        value={phoneNumber}
+                        onChangeText={setPhoneNumber}
+                        placeholder="Enter phone number"
+                        autoFocus
+                      />
+                    </View>
+                    <View style={styles.nextButtonContainer}>
+                      <TouchableOpacity
+                        onPress={registerUser}
+                        style={styles.nextButton}
+                      >
+                        <Text style={styles.nextButtonText}>Next</Text>
+                      </TouchableOpacity>
+                      {loading && (
+                        <ActivityIndicator size="small" color="#000" />
+                      )}
+                    </View>
+                  </View>
+                </>
               )}
 
               {step === 3 && (
@@ -210,113 +278,28 @@ const Index = () => {
                       <Icon name="arrow-back" size={30} color="#fff" />
                     </TouchableOpacity>
                   </View>
-                  <View style={styles.bankVerificationContainer}>
+
+                  <View style={styles.phoneNumberScreenContainer}>
                     <View style={styles.inputContainer}>
-                      <Text style={styles.label}>Confirm your identity</Text>
-                      <Text style={styles.subText}>
-                        To continue you need to confirm your identity.
-                      </Text>
-                    </View>
-                    <View style={styles.nextButtonContainer}>
-                      <TouchableOpacity style={styles.nextButton}>
-                        <Text
-                          style={styles.nextButtonText}
-                          // onPress={startAuthFlow}
-                          onPress={() => setStep(4)}
-                        >
-                          Next
-                        </Text>
-                      </TouchableOpacity>
-                      {loading && (
-                        <ActivityIndicator size="small" color="#fff" />
-                      )}
-                    </View>
-                  </View>
-                </>
-              )}
-
-              {step === 4 && (
-                <>
-                  <View style={styles.backButtonContainer}>
-                    <TouchableOpacity
-                      style={styles.backButton}
-                      onPress={() => {
-                        if (confirm) {
-                          // Navigate back to phone number input if confirm exists
-                          setConfirm(null); // Clear the confirmation object
-                        } else {
-                          setStep(3); // Navigate back to Social Security Number input
-                        }
-                      }}
-                    >
-                      <Icon name="arrow-back" size={30} color="#fff" />
-                    </TouchableOpacity>
-                  </View>
-
-                  {confirm ? (
-                    <View style={styles.phoneNumberScreenContainer}>
-                      <View style={styles.inputContainer}>
-                        <Text style={styles.label}>
-                          Enter Confirmation Code
-                        </Text>
-                        <TextInput
-                          style={styles.input}
-                          value={code}
-                          onChangeText={(text) => setCode(text)}
-                          keyboardType="numeric"
-                          placeholder="Enter verification code"
-                        />
-
-                        <View style={styles.confirmButtonContainer}>
-                          <TouchableOpacity
-                            style={styles.confirmButton}
-                            onPress={confirmCode}
-                            disabled={loading}
-                          >
-                            <Text style={styles.confirmButtonText}>
-                              Confirm Code
-                            </Text>
-                          </TouchableOpacity>
-                        </View>
-                      </View>
-                    </View>
-                  ) : (
-                    <View style={styles.phoneNumberScreenContainer}>
-                      <View style={styles.inputContainer}>
-                        <Text style={styles.label}>
-                          What is your phone number?
-                        </Text>
-                        <Text style={styles.subText}>
-                          {/* Phone Number: {hardcodedPhoneNumber} */}
-                          We will send you a text message with a code to confirm
-                          your number.
-                        </Text>
-                        <TextInput
-                          style={styles.input}
-                          value={phoneNumber}
-                          onChangeText={setPhoneNumber}
-                          placeholder="Enter phone number"
-                          autoFocus
-                        />
-                      </View>
-                      <View style={styles.nextButtonContainer}>
+                      <Text style={styles.label}>Enter Verification Code</Text>
+                      <TextInput
+                        style={styles.input}
+                        value={code}
+                        onChangeText={setCode}
+                        placeholder="Enter OTP"
+                      />
+                      <View style={styles.confirmButtonContainer}>
                         <TouchableOpacity
-                          onPress={() => {
-                            setLoading(true);
-                            signInWithPhoneNumber(hardcodedPhoneNumber).finally(
-                              () => setLoading(false)
-                            );
-                          }}
-                          style={styles.nextButton}
+                          style={styles.confirmButton}
+                          onPress={verifyOTP}
                         >
-                          <Text style={styles.nextButtonText}>Next</Text>
+                          <Text style={styles.confirmButtonText}>
+                            Confirm Code
+                          </Text>
                         </TouchableOpacity>
-                        {loading && (
-                          <ActivityIndicator size="small" color="#000" />
-                        )}
                       </View>
                     </View>
-                  )}
+                  </View>
                 </>
               )}
             </KeyboardAvoidingView>
@@ -328,8 +311,14 @@ const Index = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.welcomeText}>Welcome, {user.phoneNumber}</Text>
-      <Button title="Sign Out" onPress={() => auth().signOut()} />
+      {/* <Text style={styles.welcomeText}>Welcome, {user.phone}</Text>
+      <Button
+        title="Sign Out"
+        onPress={() => {
+          pb.authStore.clear();
+          setUser(null);
+        }}
+      /> */}
     </SafeAreaView>
   );
 };

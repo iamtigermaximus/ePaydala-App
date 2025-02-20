@@ -14,22 +14,22 @@ import {
   FontAwesome5,
   FontAwesome,
 } from '@expo/vector-icons';
-import auth from '@react-native-firebase/auth';
+// import auth from '@react-native-firebase/auth';
 import { useRouter } from 'expo-router';
+import PocketBase from 'pocketbase';
+
+const pb = new PocketBase('http://127.0.0.1:8090');
 
 const ProfileScreen = () => {
-  const user = auth().currentUser;
+  // const user = auth().currentUser;
   const router = useRouter();
+  const user = pb.authStore.model;
 
-  const handleLogout = async () => {
-    try {
-      await auth().signOut(); // Sign the user out from Firebase
-      router.push('/'); // Navigate to Login screen after logout
-    } catch (error) {
-      console.error('Error logging out:', error);
-      alert('Failed to log out. Please try again.');
-    }
+  const handleLogout = () => {
+    pb.authStore.clear(); // Clear PocketBase authentication
+    router.replace('/');
   };
+
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.personalDetailsContainer}>

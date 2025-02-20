@@ -1,16 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tabs, useRouter } from 'expo-router';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 
-import auth from '@react-native-firebase/auth';
+// import auth from '@react-native-firebase/auth';
+import PocketBase, { RecordModel } from 'pocketbase';
+
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
+const pb = new PocketBase('http://127.0.0.1:8090');
+
 const Layout = () => {
-  const user = auth().currentUser;
-  const displayName = user?.phoneNumber || 'User';
+  // const user = auth().currentUser;
+  const [user, setUser] = useState<RecordModel | null>(null);
+  const [loading, setLoading] = useState(true); // Loading state for user data
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const currentUser = pb.authStore.model;
+        console.log('Fetched currentUser:', currentUser); // Log the full currentUser data
+        if (currentUser) {
+          setUser(currentUser);
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      } finally {
+        setLoading(false); // Stop loading once user data is fetched
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const displayName = user?.phone ? user.phone : 'User'; // Fallback to 'User' if no phone
+
+  console.log('User state:', user);
+
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
   return (
     <View style={styles.tabContainer}>
       <Tabs
